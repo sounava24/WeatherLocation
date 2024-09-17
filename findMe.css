@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: antiquewhite;
+}
+.findme{
+    padding: 1rem;
+    background-color: brown;
+    color: antiquewhite;
+    border-radius: 2rem;
+    text-align: center;
+    border-color: antiquewhite;
+    height: 3rem;
+    width: 7rem;
+}
+
+.findme:hover{
+    background-color: antiquewhite;
+    color: brown;
+    border-radius: 2rem;
+    text-align: center;
+    border-color: aliceblue;
+}
+.locfinder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 2rem;
+    font-size:x-large;
+    height: 100vh;
+}
+.cards{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color:black;
+    color:antiquewhite;
+    padding: 3rem;
+    border-radius: 10px;
+}
+.locName,.date{
+    text-align: center;
+}
+.minMax{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+.windHumid{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+.mapme{
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.mapme{
+    background-color:brown;
+    color: antiquewhite;
+}
+.hide{
+    display: none;
+}
+.imgg{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
