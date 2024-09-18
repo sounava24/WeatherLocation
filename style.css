@@ -1,12 +1,13 @@
 *{
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 body{
     background-color: antiquewhite;
 }
 .findme{
-    padding: 1rem;
+    padding: 0rem;
     background-color: brown;
     color: antiquewhite;
     border-radius: 2rem;
@@ -27,7 +28,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
     flex-direction: column;
     gap: 2rem;
     font-size:x-large;
@@ -48,7 +48,7 @@ body{
 .minMax{
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 5.5rem;
 }
 .windHumid{
     display: flex;
@@ -68,4 +68,19 @@ body{
     padding: 0;
     margin: 0;
     text-align: center;
+}
+.loc{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+.lat,.long.min,.max,.humid,.wind{
+    height: fit-content;
+    width: 250px ;
+}
+.weather{
+    padding-top: 0;
+    font-size:xx-large;
+    color: brown;
+    font-weight: bolder;
 }

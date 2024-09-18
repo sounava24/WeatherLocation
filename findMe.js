@@ -1,4 +1,6 @@
 const loc = document.querySelector(".loc");
+const latitude = document.querySelector(".lat");
+const longitude = document.querySelector(".long");
 const locName = document.querySelector(".locName");
 const feel = document.querySelector(".feel");
 const min = document.querySelector(".min");
@@ -17,7 +19,8 @@ const success = (position) => {
   lat = position.coords.latitude;
   long = position.coords.longitude;
   console.log(lat, long);
-  loc.innerText = `Lat: ${lat}° Long: ${long}°`;
+  latitude.innerText = `Lat: ${lat}°`
+  longitude.innerText=`Long: ${long}°`;
   weather(lat, long);
 };
 
@@ -64,7 +67,6 @@ const weather = async (lat, long) => {
 
 const find = () => {
   if (navigator.geolocation) {
-    loc.innerText = "Loading...";
     navigator.geolocation.getCurrentPosition(success, error);
   } else {
     loc.textContent = "Geolocation is not supported by your browser";
