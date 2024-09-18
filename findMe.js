@@ -1,4 +1,3 @@
-const finde = document.querySelector(".findme");
 const loc = document.querySelector(".loc");
 const locName = document.querySelector(".locName");
 const feel = document.querySelector(".feel");
@@ -72,9 +71,7 @@ const find = () => {
   }
 };
 
-finde.addEventListener("click", () => {
-  cards.classList.remove("hide");
-  finde.classList.add("hide");
+document.addEventListener("DOMContentLoaded", () => {
   find();
 });
 
