@@ -6,24 +6,6 @@
 body{
     background-color: antiquewhite;
 }
-.findme{
-    padding: 0rem;
-    background-color: brown;
-    color: antiquewhite;
-    border-radius: 2rem;
-    text-align: center;
-    border-color: antiquewhite;
-    height: 3rem;
-    width: 7rem;
-}
-
-.findme:hover{
-    background-color: antiquewhite;
-    color: brown;
-    border-radius: 2rem;
-    text-align: center;
-    border-color: aliceblue;
-}
 .locfinder{
     display: flex;
     align-items: center;
@@ -39,21 +21,23 @@ body{
     gap: 1rem;
     background-color:black;
     color:antiquewhite;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 10px;
+    width: 30vw;
 }
 .locName,.date{
     text-align: center;
 }
 .minMax{
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
-    gap: 5.5rem;
+    
 }
 .windHumid{
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
-    gap: 2rem;
 }
 .mapme{
     padding: 1rem;
@@ -72,12 +56,9 @@ body{
 .loc{
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    justify-content: space-between;
 }
-.lat,.long.min,.max,.humid,.wind{
-    height: fit-content;
-    width: 250px ;
-}
+
 .weather{
     padding-top: 0;
     font-size:xx-large;
