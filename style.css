@@ -21,9 +21,10 @@ body{
     gap: 1rem;
     background-color:black;
     color:antiquewhite;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 10px;
     width: auto;
+    font-size: large;
 }
 .locName,.date{
     text-align: center;
@@ -64,3 +65,5 @@ body{
     color: brown;
     font-weight: bolder;
 }
+
+
