@@ -23,7 +23,7 @@ body{
     color:antiquewhite;
     padding: 2rem;
     border-radius: 10px;
-    width: 30vw;
+    width: auto;
 }
 .locName,.date{
     text-align: center;
@@ -32,6 +32,7 @@ body{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    gap: 1rem;
     
 }
 .windHumid{
@@ -49,8 +50,6 @@ body{
 }
 
 .imgg{
-    padding: 0;
-    margin: 0;
     text-align: center;
 }
 .loc{
@@ -60,7 +59,7 @@ body{
 }
 
 .weather{
-    padding-top: 0;
+ 
     font-size:xx-large;
     color: brown;
     font-weight: bolder;
