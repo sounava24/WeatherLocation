@@ -13,7 +13,7 @@ body{
     flex-direction: column;
     gap: 2rem;
     font-size:x-large;
-    height: 100vh;
+    height: 90vh;
 }
 .cards{
     display: flex;
