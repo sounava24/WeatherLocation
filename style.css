@@ -134,7 +134,10 @@ hr {
     .locfinder {
         font-size: large; 
     }
-
+    .loc{
+        flex-direction: column;
+        gap:.5rem ;
+    }
     .minMax, .windHumid {
         flex-direction: column; 
         gap: 0.5rem;
@@ -160,7 +163,10 @@ hr {
     .locfinder {
         font-size: medium; 
     }
-
+    .loc{
+        flex-direction: column;
+        gap:.5rem ;
+    }
     .weather {
         font-size: x-large; 
     }
