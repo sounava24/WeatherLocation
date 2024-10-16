@@ -10,17 +10,18 @@ const wind = document.querySelector(".wind");
 const cloudsElem = document.querySelector(".clouds");
 const dateElem = document.querySelector(".date");
 const mapme = document.querySelector(".mapme");
-const cards = document.querySelector(".cards");
 const imgg = document.querySelector(".imgg");
 
-let lat, long; // Store lat and long here for later use
+const weekCards = document.querySelectorAll(".week .card"); // Select all cards in the week
+
+let lat, long; 
 
 const success = (position) => {
   lat = position.coords.latitude;
   long = position.coords.longitude;
   console.log(lat, long);
-  latitude.innerText = `Lat: ${lat}°`
-  longitude.innerText=`Long: ${long}°`;
+  latitude.innerText = `Latitude: ${lat}°`;
+  longitude.innerText=`Longitude: ${long}°`;
   weather(lat, long);
 };
 
@@ -36,30 +37,48 @@ const weather = async (lat, long) => {
     const data = await response.json();
     console.log(data);
 
-    let city = data.city.name;
-    let temp = data.list[0].main.temp;
-    let feels = data.list[0].main.feels_like;
-    let minTemp = data.list[0].main.temp_min;
-    let maxTemp = data.list[0].main.temp_max;
-    let humidity = data.list[0].main.humidity;
-    let windSpeed = data.list[0].wind.speed;
-    let weatherMain = data.list[0].weather[0].main;
-    let cloudsDescription = data.list[0].weather[0].description;
-    let iconCode = data.list[0].weather[0].icon;
-    let date = data.list[0].dt_txt;
+  
+    let datas = [
+      [data.city.name, data.list[0].main.feels_like, data.list[0].main.temp_min, data.list[0].main.temp_max,
+      data.list[0].main.humidity,  data.list[0].wind.speed, data.list[0].weather[0].main, data.list[0].weather[0].description,data.list[0].weather[0].icon,(data.list[0].dt_txt).split(" ",1)],
 
-    locName.innerText = `Location: ${city}`;
-    feel.innerText = `Feels like: ${feels}°C`;
-    min.innerText = `Min Temp: ${minTemp}°C`;
-    max.innerText = `Max Temp: ${maxTemp}°C`;
-    humid.innerText = `Humidity: ${humidity}%`;
-    wind.innerText = `Wind Speed: ${windSpeed} m/s`;
-    cloudsElem.innerHTML = `Clouds: ${weatherMain} - ${cloudsDescription}`;
-    
-    // Correct the icon display using template literals (backticks)
-    console.log(imgg.innerHTML)
-    imgg.innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" style="padding:0; margin: 0;height:100px; width:100px;" alt="weather icon">`;
-    dateElem.innerText = `Date: ${date}`;
+      [data.city.name, data.list[6].main.feels_like, data.list[6].main.temp_min, data.list[6].main.temp_max,
+      data.list[6].main.humidity,  data.list[6].wind.speed, data.list[6].weather[0].main, data.list[6].weather[0].description,data.list[6].weather[0].icon,(data.list[6].dt_txt).split(" ",1)],
+
+      [data.city.name, data.list[14].main.feels_like, data.list[14].main.temp_min, data.list[14].main.temp_max,
+      data.list[14].main.humidity,  data.list[14].wind.speed, data.list[14].weather[0].main, data.list[14].weather[0].description,data.list[14].weather[0].icon,(data.list[14].dt_txt).split(" ",1)],
+
+      [data.city.name, data.list[22].main.feels_like, data.list[22].main.temp_min, data.list[22].main.temp_max,
+      data.list[22].main.humidity,  data.list[22].wind.speed, data.list[22].weather[0].main, data.list[22].weather[0].description,data.list[22].weather[0].icon,(data.list[22].dt_txt).split(" ",1)],
+
+      [data.city.name, data.list[30].main.feels_like, data.list[30].main.temp_min, data.list[30].main.temp_max,
+      data.list[30].main.humidity,  data.list[30].wind.speed, data.list[30].weather[0].main, data.list[30].weather[0].description,data.list[30].weather[0].icon,(data.list[30].dt_txt).split(" ",1)],
+
+      [data.city.name, data.list[38].main.feels_like, data.list[38].main.temp_min, data.list[38].main.temp_max,
+      data.list[38].main.humidity,  data.list[38].wind.speed, data.list[38].weather[0].main, data.list[38].weather[0].description,data.list[38].weather[0].icon,(data.list[38].dt_txt).split(" ",1)]
+    ];
+
+
+    locName.innerText = `Location: ${datas[0][0]}`;
+    feel.innerText = `Feels like: ${datas[0][1]}°C`;
+    min.innerText = `Min Temp: ${datas[0][2]}°C`;
+    max.innerText = `Max Temp: ${datas[0][3]}°C`;
+    humid.innerText = `Humidity: ${datas[0][4]}%`;
+    wind.innerText = `Wind Speed: ${datas[0][5]} m/s`;
+    cloudsElem.innerHTML = `Clouds: ${datas[0][6]} - ${datas[0][7]}`;
+    imgg.innerHTML = `<img src="https://openweathermap.org/img/wn/${datas[0][8]}@2x.png" style="height:100px; width:100px;" alt="weather icon">`;
+    dateElem.innerText = `Date: ${datas[0][9]}`;
+
+    weekCards.forEach((card, index) => {
+      const cardData = datas[index + 1]; 
+      card.querySelector(".time").innerText = `Date: ${cardData[9]}`;
+      card.querySelector(".willfeel").innerText = `Feels like: ${cardData[1]}°C`;
+      card.querySelector(".willmin").innerText = `Min Temp: ${cardData[2]}°C`;
+      card.querySelector(".willmax").innerText = `Max Temp: ${cardData[3]}°C`;
+      card.querySelector(".willhumid").innerText = `Humidity: ${cardData[4]}%`;
+      card.querySelector(".willcloud").innerText = `Clouds: ${cardData[6]} - ${cardData[7]}`;
+    });
+
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
