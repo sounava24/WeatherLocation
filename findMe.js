@@ -69,6 +69,11 @@ const weather = async (lat, long) => {
     imgg.innerHTML = `<img src="https://openweathermap.org/img/wn/${datas[0][8]}@2x.png" style="height:100px; width:100px;" alt="weather icon">`;
     dateElem.innerText = `Date: ${datas[0][9]}`;
 
+    // Update Three.js weather effects
+    if (window.updateWeatherEffects) {
+      window.updateWeatherEffects(datas[0][6], datas[0][1]);
+    }
+
     weekCards.forEach((card, index) => {
       const cardData = datas[index + 1]; 
       card.querySelector(".time").innerText = `Date: ${cardData[9]}`;
