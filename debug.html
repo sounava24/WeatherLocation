@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background: #27ae60; }
+        .error { background: #e74c3c; }
+        .warning { background: #f39c12; }
+        pre { background: #34495e; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Weather App Debug Information</h1>
+    <div id="debug-info"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const debugInfo = document.getElementById('debug-info');
+        
+        function addStatus(message, type = 'success') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            debugInfo.appendChild(div);
+        }
+        
+        function addCode(code) {
+            const pre = document.createElement('pre');
+            pre.textContent = code;
+            debugInfo.appendChild(pre);
+        }
+        
+        // Check browser capabilities
+        addStatus('🌐 Browser Info:', 'warning');
+        addCode(`User Agent: ${navigator.userAgent}
+URL: ${window.location.href}
+Protocol: ${window.location.protocol}
+Host: ${window.location.host}`);
+        
+        // Check Three.js
+        if (typeof THREE !== 'undefined') {
+            addStatus('✅ Three.js loaded successfully');
+            addCode(`Three.js version: ${THREE.REVISION}`);
+            
+            // Test WebGL
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (gl) {
+                    addStatus('✅ WebGL is supported');
+                    addCode(`WebGL Renderer: ${gl.getParameter(gl.RENDERER)}
+WebGL Vendor: ${gl.getParameter(gl.VENDOR)}`);
+                } else {
+                    addStatus('❌ WebGL is not supported', 'error');
+                }
+            } catch (e) {
+                addStatus('❌ WebGL test failed: ' + e.message, 'error');
+            }
+        } else {
+            addStatus('❌ Three.js failed to load', 'error');
+        }
+        
+        // Check file paths
+        const files = ['style.css', 'findMe.js', 'weatherEffects.js'];
+        files.forEach(file => {
+            fetch(file)
+                .then(response => {
+                    if (response.ok) {
+                        addStatus(`✅ ${file} loaded successfully`);
+                    } else {
+                        addStatus(`❌ ${file} failed to load (${response.status})`, 'error');
+                    }
+                })
+                .catch(e => {
+                    addStatus(`❌ ${file} failed to load: ${e.message}`, 'error');
+                });
+        });
+        
+        // Console logs
+        addStatus('📝 Console Messages:', 'warning');
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        console.log = function(...args) {
+            addCode('LOG: ' + args.join(' '));
+            originalLog.apply(console, arguments);
+        };
+        
+        console.error = function(...args) {
+            addCode('ERROR: ' + args.join(' '));
+            originalError.apply(console, arguments);
+        };
+        
+        console.warn = function(...args) {
+            addCode('WARN: ' + args.join(' '));
+            originalWarn.apply(console, arguments);
+        };
+    </script>
+</body>
+</html>

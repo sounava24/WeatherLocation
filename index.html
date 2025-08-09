@@ -3,10 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather</title>
+    <meta name="description" content="Interactive weather app with stunning 3D particle effects">
+    <meta name="author" content="Weather Location App">
+    <title>Weather Location - Interactive 3D Weather Effects</title>
     <link rel="icon" href="./icon.png" type="image/png">
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
+    <script>
+      // Fallback Three.js loading
+      window.addEventListener('load', function() {
+        if (typeof THREE === 'undefined') {
+          console.warn('Primary Three.js CDN failed, trying backup...');
+          var backup = document.createElement('script');
+          backup.src = 'https://unpkg.com/three@0.128.0/build/three.min.js';
+          backup.crossOrigin = 'anonymous';
+          document.head.appendChild(backup);
+        }
+      });
+    </script>
   </head>
   <body>
     <canvas id="weather-canvas"></canvas>
@@ -82,7 +96,14 @@
 
     </div>
 
-    <script src="findMe.js"></script>
-    <script src="weatherEffects.js"></script>
+    <script src="./findMe.js"></script>
+    <script src="./weatherEffects.js"></script>
+    
+    <!-- Debug info for deployment -->
+    <script>
+      console.log('Page loaded, checking resources...');
+      console.log('Three.js available:', typeof THREE !== 'undefined');
+      console.log('Canvas element exists:', !!document.getElementById('weather-canvas'));
+    </script>
   </body>
 </html>
