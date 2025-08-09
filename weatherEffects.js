@@ -674,10 +674,54 @@ class WeatherEffects {
 let weatherEffects;
 
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        weatherEffects = new WeatherEffects();
-    }, 100);
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js failed to load. Retrying...');
+        // Retry loading Three.js
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+        script.onload = () => {
+            console.log('Three.js loaded successfully on retry');
+            initWeatherEffects();
+        };
+        script.onerror = () => {
+            console.error('Failed to load Three.js. Weather effects disabled.');
+            // Add fallback styling
+            addFallbackStyling();
+        };
+        document.head.appendChild(script);
+    } else {
+        console.log('Three.js loaded successfully');
+        initWeatherEffects();
+    }
 });
+
+function initWeatherEffects() {
+    setTimeout(() => {
+        try {
+            weatherEffects = new WeatherEffects();
+            console.log('Weather effects initialized successfully');
+        } catch (error) {
+            console.error('Error initializing weather effects:', error);
+            addFallbackStyling();
+        }
+    }, 100);
+}
+
+function addFallbackStyling() {
+    // Add some basic animated background if Three.js fails
+    const canvas = document.getElementById('weather-canvas');
+    if (canvas) {
+        canvas.style.display = 'none';
+    }
+    
+    // Add animated CSS background as fallback
+    document.body.style.background = `
+        linear-gradient(135deg, #2c3e50 0%, #3498db 25%, #9b59b6 75%, #8e44ad 100%)
+    `;
+    
+    console.log('Fallback styling applied');
+}
 
 // Global function to update effects from weather data
 window.updateWeatherEffects = (weatherMain, temperature) => {
